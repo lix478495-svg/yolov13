@@ -16,7 +16,7 @@ Example:
     os.system(f"onnxslim {f} {f} && open {f}")  # pip install onnxslim
     ```
 """
-
+from .esc import ESCBlock, C3k_ESC, C3k2_ESC
 from .block import (
     C1,
     C2,
@@ -171,5 +171,8 @@ __all__ = (
     "DownsampleConv",
     "FullPAD_Tunnel",
     "DSC3k2",
+    "ESCBlock",
+    "C3k_ESC",
+    "C3k2_ESC",
     "DSConv"
 )
