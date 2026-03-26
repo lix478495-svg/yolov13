@@ -17,6 +17,7 @@ Example:
     ```
 """
 from .esc import ESCBlock, C3k_ESC, C3k2_ESC
+from .lsconv import C3k2_LSConv, LSConv
 from .block import (
     C1,
     C2,
@@ -61,7 +62,7 @@ from .block import (
     HyperACE,
     DownsampleConv,
     FullPAD_Tunnel,
-    DSC3k2
+    DSC3k2,
 )
 from .conv import (
     CBAM,
@@ -174,5 +175,7 @@ __all__ = (
     "ESCBlock",
     "C3k_ESC",
     "C3k2_ESC",
+    "C3k2_LSConv",
+    "LSConv",
     "DSConv"
 )
