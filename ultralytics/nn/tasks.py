@@ -69,10 +69,11 @@ from ultralytics.nn.modules import (
     HyperACE,
     DownsampleConv,
     FullPAD_Tunnel,
-    DSC3k2,
     ESCBlock,
     C3k_ESC,
-    C3k2_ESC
+    C3k2_ESC,
+    C3k2_LSConv,
+    DSC3k2
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -988,8 +989,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2,
             C2f,
             C3k2,
-            C3k2_ESC, 
+            C3k2_ESC,
             C3k_ESC,
+            C3k2_LSConv,
             RepNCSPELAN4,
             ELAN1,
             ADown,
@@ -1008,7 +1010,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2fCIB,
             A2C2f,
             DSC3k2,
-            DSConv
+            DSConv,
         }:
             c1, c2 = ch[f], args[0]
             if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
@@ -1028,6 +1030,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2,
                 C3k2_ESC,
                 C3k_ESC,
+                C3k2_LSConv,
                 C2fAttn,
                 C3,
                 C3TR,
@@ -1042,7 +1045,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             }:
                 args.insert(2, n)  # number of repeats
                 n = 1
-            if m in {C3k2,C3k2_ESC, DSC3k2}:  # for P/U sizes
+            if m in {C3k2, C3k2_ESC,C3k2_LSConv,DSC3k2}:  # for P/U sizes
                 legacy = False
                 if scale in "lx":
                     args[3] = True
